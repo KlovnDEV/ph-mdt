@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Sloth MDT - EDITED BY JACK</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="nui://game/ui/jquery.js" type="text/javascript"></script> -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script  src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <img style="display:none; z-index: 10; position:absolute; border-radius: 13px; width: 97%; height: 97%; left: 2.0%; top: 1.5%; opacity: 0.95;" src="img/hackfull.gif">
+         
+    <ul class="contextmenu">
+    </ul>
+    <div id="draggedItem">
+    </div>
+    <img src="" class="gallery-image-enlarged">
+    <div class="callsign-container" style="display: none">
+        <div class="callsign-inner-container" style="display: none">
+            <div class="callsign-title">Enter Callsign</div>
+            <input type="text" maxlength="5" class="callsign-input" placeholder="6969">
+            <div class="callsign-buttons">
+                <div class="callsign-cancel">Cancel</div>
+                <div class="callsign-submit">Submit</div>
+            </div>
+        </div>
+    </div>
+    <div class="radio-container" style="display: none">
+        <div class="radio-inner-container" style="display: none">
+            <div class="radio-title">Enter Radio</div>
+            <input type="number" maxlength="3" class="radio-input" placeholder="0">
+            <div class="radio-buttons">
+                <div class="radio-cancel">Cancel</div>
+                <div class="radio-submit">Submit</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="respondphone-container" style="display: none">
+        <div class="respondphone-inner-container" style="display: none">
+            <div class="respondphone-title">Reply Message</div>
+            <input type="text" maxlength="30" class="respondphone-input" placeholder="We are on the way">
+            <div class="respondphone-buttons">
+                <div class="respondphone-cancel">Cancel</div>
+                <div class="respondphone-submit">Submit</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="subdivision-container" style="display: none">
+        <div class="subdivision-inner-container" style="display: none">
+            <div class="subdivision-title">Enter Subdivision</div>
+            <input type="text" maxlength="5" class="subdivision-input" placeholder="SEU 1">
+            <div class="subdivision-buttons">
+                <div class="subdivision-cancel">Cancel</div>
+                <div class="subdivision-submit">Submit</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dispatch-attached-units">
+        <div class="dispatch-attached-units-container">
+            <div class="dispatch-attached-units-title" data-id="0">Attached Units</div>
+            <div class="dispatch-attached-units-holder">
+            </div>
+        </div>
+    </div>
+
+    <div class="respond-calls" style="display:none;">
+        <div class="respond-calls-container" style="display:none;">
+            <div class="respond-calls-title">Call Response</div>
+            <div class="respond-calls-responses">
+            </div>
+            <textarea class="respond-calls-input" type="text" id="respondcalls" name="respondcalls" placeholder="What would you like to respond?"></textarea>
+        </div>
+    </div>
+
+    <div class="icidents-person-search">
+        <div class="icidents-person-search-container">
+            <div class="icidents-person-search-title">Person Search</div>
+            <div class="icidents-person-search-name-title">Name</div>
+            <div style="width: 95%; margin: auto; border-bottom: 2px solid #2C537B;"><input class="icidents-person-search-name-input"></div>
+            <div class="icidents-person-search-holder">
+            </div>
+        </div>
+    </div>
+
+    <div class="newwarrants-person-search">
+        <div class="newwarrants-person-search-container">
+            <div class="newwarrants-person-search-title">Person Search</div>
+            <div class="newwarrants-person-search-name-title">Name</div>
+            <div style="width: 95%; margin: auto; border-bottom: 2px solid #2C537B;"><input class="newwarrants-person-search-name-input"></div>
+            <div class="newwarrants-person-search-holder">
+            </div>
+        </div>
+    </div>
+   
+
+    <div class="incidents-charges-table" style="display: none;">
+        <div class="incidents-charges-table-container">
+            <div class="incidents-charges-title-container">
+                <div class="incidents-charges-title">Charges</div>
+            </div>
+            <div class="current-charges-container">
+                <div class="current-charges-inner-container">
+                    <div class="current-charges-title">Current Charges</div>
+                </div>
+                <div id="current-charges-holder">
+                    <div class="current-charges-tag">test</div>
+                </div>
+            </div>
+            <div class="offenses-search-area">
+                <input type="text" class="offenses-search" placeholder="Search for charges" id="offenses-search" name="offenses-search">
+            </div>
+            <div class="offenses-main-container"></div>
+        </div>
+    </div>
+
+    
+    <div class="container-load">
+        <div class="header">
+            <img src="img/sasp_badge.png" class="badge-logo">
+            <div class="header-left">
+                <div class="header-title" style="color: #caa95d; font-weight: bold; font-size: 20px;">UDP</div>
+                <div style="color: white; font-weight: lighter; font-size: 18px;">Mobile Database Terminal</div>
+            </div>
+            <div class="header-right">
+                <div style="color: white; font-weight: lighter; font-size: 16px; position: absolute; right:0; bottom:-6vh;" class="name-shit">Welcome, Loading...
+                </div>
+            </div>
+        </div>
+        <div class="loader"></div>
+        <div class="main-container">
+            <div class="nav-menu">
+                <div class="nav-item dashboard-nav-item">Dashboard</div>
+                <div class="nav-item profiles-nav-item">Profiles</div>
+                <div class="nav-item incidents-nav-item">Incidents</div>
+                <div class="nav-item reports-nav-item">Reports</div>
+                <div class="nav-item bolo-nav-item">BOLOs</div>
+                <div class="nav-item">Roster</div>
+                <div class="nav-item dmv-nav-item">DMV</div>
+                <div class="nav-item weaponreg-nav-item">Weapon Database</div>
+                <div class="nav-item doj-nav-item ">DOJ</div>
+                <div class="nav-item cams-nav-item">Cameras</div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-page-container close-all">
+        <div class="header">
+            <img src="img/sasp_badge.png" class="badge-logo">
+            <div class="header-left">
+                <div class="header-title" style="color: #caa95d; font-weight: bold; font-size: 20px;">Unified Police Department</div>
+                <div style="color: white; font-weight: lighter; font-size: 18px;">Mobile Database Terminal</div>
+            </div>
+            
+            <div class="header-right">
+                <div style="color: white; font-weight: lighter; font-size: 16px; position: absolute; right:0; bottom:-6vh;" class="name-shit">Welcome, Loading...
+                </div>
+            </div>
+        </div>
+        <div class="header-tabs">
+            <div class="tab-instances">
+             
+            </div>
+            <div style="margin-left:1vh; width:4vh;" class="createMDTTab">
+                <p style="margin-bottom:10vh;">+</p> 
+             </div>
+        </div>
+        <div class="main-container">
+            <div class="nav-menu">
+                <div class="nav-item dashboard-nav-item active-nav" data-page=".dashboard-page-container">Dashboard</div>
+                <div class="nav-item profiles-nav-item" data-page=".profile-page-container">Profiles</div>
+                <div class="nav-item incidents-nav-item" data-page=".incidents-page-container">Incidents</div>
+                <div class="nav-item reports-nav-item" data-page=".reports-page-container">Reports</div>
+                <div class="nav-item bolo-nav-item" data-page=".bolos-page-container">BOLOs</div>
+                <div class="nav-item penalcode-nav-item" data-page=".penalcode-page-container">Roster</div>
+                <div class="nav-item dmv-nav-item" data-page=".dmv-page-container">DMV</div>
+                <div class="nav-item weaponreg-nav-item "data-page=".weaponreg-page-container">Weapon Database</div>
+                <div class="nav-item doj-nav-item "data-page=".doj-page-container">DOJ</div>
+                <div class="nav-item cams-nav-item" data-page=".cams-page-container">Cameras</div>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <div class="dispatch-comms-container">
+                    <div style="display: flex;" class="reports-search-title-holder">
+                        <div class="reports-search-title dispatch-title-ofsomesort">311</div>
+                        <div class="dispatch-comms-refresh">Refresh</div>
+                    </div>
+                    <div class="dispatch-items"> </div>
+                    <textarea class="dispatch-input" type="text" id="dispatchmsg" name="dispatchmsg" placeholder="Message #dispatch"></textarea>
+                </div>
+                <div class="reports-container" id="home-reports-container" style="display:none">
+                    <div style="display: flex;" class="reports-search-title-holder">
+                        <div class="reports-search-title">Reports</div>
+                        <div class="reports-search-refresh">Refresh</div>
+                    </div>
+                    <div class="reports-items">
+                    </div>
+                </div>
+                <div class="warrants-container" id="home-warrants-container">
+                    <div class="warrants-title"> <span class="fas fa-search"></span> Warrants</div>
+                    <div class="warrants-items">
+
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <div class="calls-container">
+
+                    <div class="calls-title">Calls</div>
+
+                    <div class="active-calls-list">
+                        <div class="active-calls-item">
+                            <div class="active-call-inner-container">
+        
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+          
+
+
+            <div class="dispatch-container">
+                <div class="dispatch-title"><span class="fas fa-search"></span> Dispatch</div>
+                <div style="display: flex; align-items: center;">
+                    <div class="active-unit-title">Active Units</div>
+                    <div class="active-unit-count" id="police-count">0</div>
+                    <div class="active-unit-count" id="bcso-count">0</div>
+                    <div class="active-unit-count" id="ems-count">0</div>
+                   
+                    <!-- <div class="active-unit-count" id="fire-count">0</div> 
+                     <div class="active-unit-count" id="doj-count">0</div>-->
+
+                </div>
+                <div class="active-unit-list">
+                </div>
+                <div class="phonecalls-container">
+                    <div class="phonecalls-title">911s</div>
+                    <div class="active-phonecalls-list">
+                        <div class="active-phonecalls-item">
+                            <div class="active-phonecalls-inner-container">
+        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+    <div class="profile-page-container close-all">
+        <div class="header">
+            <img src="img/sasp_badge.png" class="badge-logo">
+            <div class="header-left">
+                <div class="header-title" style="color: #caa95d; font-weight: bold; font-size: 20px;">UNIFED POLICE DEPARTMENT</div>
+                <div style="color: white; font-weight: lighter; font-size: 18px;">Mobile Database Terminal</div>
+            </div>
+            <div class="header-right">
+                <div style="color: white; font-weight: lighter; font-size: 16px; position: absolute; right:0; bottom:-6vh;" class="name-shit">Welcome, Loading...
+                </div>
+            </div>
+        </div>
+        <div class="header-tabs">
+            <div class="tab-instances">
+             
+            </div>
+            <div style="margin-left:1vh; width:4vh;" class="createMDTTab">
+                <p style="margin-bottom:10vh;">+</p> 
+             </div>
+        </div>
+        <div class="main-container">
+            <div class="nav-menu">
+                <div class="nav-item dashboard-nav-item" data-page=".dashboard-page-container">Dashboard</div>
+                <div class="nav-item profiles-nav-item active-nav" data-page=".profile-page-container">Profiles</div>
+                <div class="nav-item incidents-nav-item" data-page=".incidents-page-container">Incidents</div>
+                <div class="nav-item reports-nav-item" data-page=".reports-page-container">Reports</div>
+                <div class="nav-item bolo-nav-item" data-page=".bolos-page-container">BOLOs</div>
+                <div class="nav-item penalcode-nav-item" data-page=".penalcode-page-container">Roster</div>
+                <div class="nav-item dmv-nav-item" data-page=".dmv-page-container">DMV</div>
+                <div class="nav-item weaponreg-nav-item "data-page=".weaponreg-page-container">Weapon Database</div>
+                <div class="nav-item doj-nav-item "data-page=".doj-page-container">DOJ</div>
+                <div class="nav-item cams-nav-item" data-page=".cams-page-container">Cameras</div>
+            </div>
+            <div class="profile-container">
+                <div class="profile-title"> <span class="fas fa-search"></span> Profiles</div>
+                <div class="profile-search-input"><input id="profile-search-input" type="text"
+                        placeholder="Search Person..."></div>
+                <div class="profile-items">
+                </div>
+            </div>
+            <div class="manage-profile-container">
+                <div class="manage-profile-title">Manage Profile</div>
+                <div style="display: flex;">
+                    <div class="manage-profile-editing-title">You are currently editing ...</div>
+                    <div class="manage-profile-save">Save</div>
+                </div>
+                <div class="manage-profile-info-container">
+                    <img src="img/male.png" class="manage-profile-pic" onerror="this.src='img/not-found.jpg'">
+                    <div class="manage-profile-info-inner-container">
+                        <div class="manage-profile-citizenid">Citizen ID</div>
+                        <div><span class="fas fa-address-card manage-cid-pic"></span><input type="text" readonly class="manage-profile-citizenid-input"></div>
+                        <div class="line"></div>
+                        <div class="manage-profile-name">Firstname</div>
+                        <div><span class="fas fa-user manage-cid-pic"></span><input type="text" readonly class="manage-profile-name-input manage-profile-name-input-1"></div>
+                        <div class="line"></div>
+                        <div class="manage-profile-name">Lastname</div>
+                        <div><span class="fas fa-user manage-cid-pic"></span><input type="text" readonly class="manage-profile-name-input manage-profile-name-input-2"></div>
+                        <div class="line"></div>
+                        <div class="manage-profile-dob">DOB</div>
+                        <div><span class="far fa-calendar-alt manage-cid-pic"></span><input type="text" readonly class="manage-profile-dob-input"></div>
+                        <div class="line"></div>
+
+                        <div class="manage-profile-url">Profile Image URL</div>
+                        <div><span class="fas fa-images manage-cid-pic"></span><input type="text" class="manage-profile-url-input"></div>
+                        <div class="line" style="margin-bottom: 0px;"></div>
+
+                        <div class="manage-profile-fingerprint-title">Fingerprint</div>
+                        <div><span class="fas fa-fingerprint manage-cid-pic"></span><input type="text" readonly class="manage-profile-fingerprint"></div>
+                        <div class="line"></div>
+
+                        <div class="manage-profile-fingerprint-title">Phone Number</div>
+                        <div><span class="fas fa-phone manage-cid-pic"></span><input type="text" readonly class="manage-profile-phonenumber"></div>
+                        <div class="line"></div>
+
+                        <div class="manage-profile-probationstate-title">On Probation</div>
+                        <div class="line"></div>
+                        
+                    </div>
+                </div>
+              
+                <textarea class="manage-profile-info" placeholder="Place user information here..." disabled></textarea>
+                <div class="expunge-btn">Authorize Expungment</div>
+            </div>
+            <div class="manage-profile-right-container">
+                <div class="manage-profile-licenses-container display_hidden">
+                    <div class="license-title">Licenses <span class="licenses-amount"></span></div>
+                    <div class="licenses-holder"></div>
+                </div>
+                <div class="manage-profile-vehs-container display_hidden">
+                    <div class="vehs-title">Vehicles</div>
+                    <div class="vehs-holder"></div>
+                </div>
+                <div class="manage-profile-houses-container display_hidden">
+                    <div class="houses-title">Properties</div>
+                    <div class="houses-holder"></div>
+                </div>
+                <div class="manage-profile-employment-container display_hidden">
+                    <div class="employment-title">Employment</div>
+                    <div class="employment-holder"></div>
+                </div>
+               
+
+                <!-- Flakey, I need you to do the linked reports HTML/CSS for me. -->
+
+                <div class="manage-convictions-container">
+                    <div class="convictions-title">Known Convictions</div>
+                    <div class="convictions-holder"></div>
+                </div>
+
+                <div class="manage-groups-tags-container">
+                    <div style="display: flex; align-items: center; width: 95%;">
+                        <div class="manage-groups-tags-title">Affiliated Groups</div>
+                        <div class="manage-groups-tags-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="manage-groups-tags-holder">
+                    </div>
+                </div>
+
+                <div class="manage-profile-gallery-container">
+                    <div style="display: flex; align-items: center;">
+                        <div class="gallery-title">Gallery</div>
+                        <div class="gallery-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="gallery-upload-input"><input id="gallery-upload-input" placeholder="Upload URL...">
+                    </div>
+                    <div class="gallery-inner-container"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="incidents-page-container close-all">
+        <div class="header">
+            <img src="img/sasp_badge.png" class="badge-logo">
+            <div class="header-left">
+                <div class="header-title" style="color: #caa95d; font-weight: bold; font-size: 20px;">UNIFED POLICE DEPARTMENT</div>
+                <div style="color: white; font-weight: lighter; font-size: 18px;">Mobile Database Terminal</div>
+            </div>
+            <div class="header-right">
+                <div style="color: white; font-weight: lighter; font-size: 16px; position: absolute; right:0; bottom:-6vh;" class="name-shit">Welcome, Loading...
+                </div>
+            </div>
+        </div>
+        <div class="header-tabs">
+            <div class="tab-instances">
+             
+            </div>
+            <div style="margin-left:1vh; width:4vh;" class="createMDTTab">
+                <p style="margin-bottom:10vh;">+</p> 
+             </div>
+        </div>
+        <div class="main-container">
+            <div class="nav-menu">
+                <div class="nav-item dashboard-nav-item" data-page=".dashboard-page-container">Dashboard</div>
+                <div class="nav-item profiles-nav-item" data-page=".profile-page-container">Profiles</div>
+                <div class="nav-item incidents-nav-item active-nav" data-page=".incidents-page-container">Incidents</div>
+                <div class="nav-item reports-nav-item" data-page=".reports-page-container">Reports</div>
+                <div class="nav-item bolo-nav-item" data-page=".bolos-page-container">BOLOs</div>
+                <div class="nav-item penalcode-nav-item" data-page=".penalcode-page-container">Roster</div>
+                <div class="nav-item dmv-nav-item" data-page=".dmv-page-container">DMV</div>
+                <div class="nav-item weaponreg-nav-item "data-page=".weaponreg-page-container">Weapon Database</div>
+                <div class="nav-item doj-nav-item "data-page=".doj-page-container">DOJ</div>
+                <div class="nav-item cams-nav-item" data-page=".cams-page-container">Cameras</div>
+            </div>
+            <div class="incidents-container">
+                <div style="display: flex;" class="reports-search-title-holder">
+                    <div class="incidents-title"> <span class="fas fa-search"></span> Incidents</div>
+                    <div class="incidents-search-refresh">Refresh</div>
+                </div>
+                <div class="incidents-search-input"><input id="incidents-search-input" placeholder="Search Incident...">
+                </div>
+                <div class="incidents-items">
+                </div>
+            </div>
+            <div class="manage-incidents-container">
+                <div style="display: flex;" class="manage-incidents-title-holder">
+                    <div class="manage-incidents-title">Manage Incident</div>
+                        <div class="manage-incidents-create"> <span class="fas fa-plus" style="margin-top: 3.5px;"></span>
+                    </div>
+                    <!-- <div class="manage-incidents-save"><span class="fas fa-save" style="margin-top: 3.5px;"></span></div> -->
+                </div>
+                <div class="manage-incidents-editing-title" data-id=0>You are currently creating a new Incident</div>
+                <div class="manage-incidents-title-tag">Title</div>
+                <div class="manage-incidents-title-input"><span class="fas fa-tags"></span> <input placeholder="Place title here..." class="manage-incidents-title-input" id="manage-incidents-title-input"></div>
+                <textarea class="manage-incidents-reports-content"
+                    placeholder="Incident report content goes here..."></textarea>
+
+                <div class="manage-incidents-evidence-container">
+                    <div style="display: flex; align-items: center; width: 95%;">
+                        <div class="manage-incidents-evidence-title">Evidence</div>
+                        <div class="manage-incidents-evidence-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="incidents-upload-input"><input id="incidents-upload-input" placeholder="Upload URL...">
+                    </div>
+                    <div class="manage-incidents-evidence-holder">
+                    </div>
+                </div>
+                
+                <div class="manage-incidents-officers-container">
+                    <div style="display: flex; align-items: center; width: 95%;">
+                        <div class="manage-incidents-officers-title">Officers Involved</div>
+                        <div class="manage-incidents-officers-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="manage-incidents-officers-holder">
+
+                    </div>
+                </div>
+                <div class="manage-incidents-civilians-container">
+                    <div style="display: flex; align-items: center; width: 95%;">
+                        <div class="manage-incidents-civilians-title">Civilians Involved</div>
+                        <div class="manage-incidents-civilians-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="manage-incidents-civilians-holder">
+
+                    </div>
+                </div>
+                <div class="manage-incidents-tags-container">
+                    <div style="display: flex; align-items: center; width: 95%;">
+                        <div class="manage-incidents-tags-title">Tags</div>
+                        <div class="manage-incidents-tags-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="manage-incidents-tags-holder">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="associated-incidents-container">
+                <div class="associated-incidents-title">Associated</div>
+                <div class="associated-incidents-tags-container">
+                    <div style="display: flex; align-items: center; width: 95%;">
+                        <div class="associated-incidents-tags-title">Criminals Involved</div>
+                        <div class="associated-incidents-tags-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="associated-incidents-tags-holder">
+                    </div>
+                </div>
+                <div class="incidents-ghost-holder">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reports-page-container close-all">
+        <div class="header">
+            <img src="img/sasp_badge.png" class="badge-logo">
+            <div class="header-left">
+                <div class="header-title" style="color: #caa95d; font-weight: bold; font-size: 20px;">SAN ANDREAS STATE POLICE</div>
+                <div style="color: white; font-weight: lighter; font-size: 18px;">Mobile Database Terminal</div>
+            </div>
+            <div class="header-right">
+                <div style="color: white; font-weight: lighter; font-size: 16px; position: absolute; right:0; bottom:-6vh;" class="name-shit">Welcome, Loading...
+                </div>
+            </div>
+        </div>
+        <div class="header-tabs">
+            <div class="tab-instances">
+             
+            </div>
+            <div style="margin-left:1vh; width:4vh;" class="createMDTTab">
+                <p style="margin-bottom:10vh;">+</p> 
+             </div>
+        </div>
+        <div class="main-container">
+            <div class="nav-menu">
+                <div class="nav-item dashboard-nav-item" data-page=".dashboard-page-container">Dashboard</div>
+                <div class="nav-item profiles-nav-item" data-page=".profile-page-container">Profiles</div>
+                <div class="nav-item incidents-nav-item" data-page=".incidents-page-container">Incidents</div>
+                <div class="nav-item reports-nav-item active-nav" data-page=".reports-page-container active-nav">Reports</div>
+                <div class="nav-item bolo-nav-item" data-page=".bolos-page-container">BOLOs</div>
+                <div class="nav-item penalcode-nav-item" data-page=".penalcode-page-container">Roster</div>
+                <div class="nav-item dmv-nav-item" data-page=".dmv-page-container">DMV</div>
+                <div class="nav-item weaponreg-nav-item "data-page=".weaponreg-page-container">Weapon Database</div>
+                <div class="nav-item doj-nav-item "data-page=".doj-page-container">DOJ</div>
+                <div class="nav-item cams-nav-item" data-page=".cams-page-container">Cameras</div>
+
+            </div>
+            <div class="reports-container">
+
+                <div style="display: flex;" class="reports-search-title-holder">
+                    <div class="reports-search-title"> <span class="fas fa-search"></span> Reports</div>
+                    <div class="reports-search-refresh">Refresh</div>
+                </div>
+                <div class="reports-search-input"><input id="reports-search-input" placeholder="Search Report..."> </div>
+                <div class="reports-items">
+                </div>
+            </div>
+            <div class="manage-reports-container">
+                <div style="display: flex;" class="manage-reports-title-holder">
+                    <div class="manage-reports-title">Manage Report</div>
+                    <div class="manage-reports-new">New</div>
+                    <div class="manage-reports-save">Save</div>
+                </div>
+                <div class="manage-reports-editing-title" data-id=0>You are currently creating a new report</div>
+                <div class="manage-reports-input-tag">Title</div>
+                <div class="manage-reports-input-title">
+                    <span class="fas fa-tags"></span>
+                    <input placeholder="Place title here..." id="reporttitle" class="manage-reports-input-title">
+                </div>
+
+                <div class="manage-reports-input-tag">Type</div>
+                <div class="manage-reports-input-type"><span class="fas fa-folder"></span> <input placeholder="Place report type here..." id="reporttype" class="manage-reports-input-type"></div>
+
+                <textarea class="manage-reports-reports-content" id="reportdetail" placeholder="Report detail goes here..."></textarea>
+            </div>
+
+            <div class="manage-reports-right-container">
+                <div class="manage-reports-tags-container">
+                    <div style="display: flex; align-items: center;">
+                        <div class="manage-reports-title-tag">Tags</div>
+                        <div class="manage-reports-tags-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="manage-reports-tags-holder"></div>
+                </div>
+                <div class="manage-reports-gallery-container">
+                    <div style="display: flex; align-items: center;">
+                        <div class="gallery-title">Gallery</div>
+                        <div class="reports-gallery-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="reports-gallery-upload-input"><input id="reports-gallery-upload-input" placeholder="Upload URL...">
+                    </div>
+                    <div class="reports-gallery-inner-container"></div>
+                </div>
+                <div class="reports-officers-tags-container">
+                    <div style="display: flex; align-items: center;">
+                        <div class="tags-title" id="reports-officers-involved-tag-title">Officers Involved</div>
+                        <div class="reports-officers-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="reports-officers-tags-holder"></div>
+                </div>
+                <div class="reports-civilians-tags-container">
+                    <div style="display: flex; align-items: center;">
+                        <div class="tags-title">Civilians Involved</div>
+                        <div class="reports-civilians-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="reports-civilians-tags-holder"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="bolos-page-container close-all">
+        <div class="header">
+            <img src="img/sasp_badge.png" class="badge-logo">
+            <div class="header-left">
+                <div class="header-title" style="color: #caa95d; font-weight: bold; font-size: 20px;">SAN ANDREAS STATE POLICE</div>
+                <div style="color: white; font-weight: lighter; font-size: 18px;">Mobile Database Terminal</div>
+            </div>
+            <div class="header-right">
+                <div style="color: white; font-weight: lighter; font-size: 16px; position: absolute; right:0; bottom:-6vh;" class="name-shit">Welcome, Loading...
+                </div>
+            </div>
+        </div>
+        <div class="header-tabs">
+            <div class="tab-instances">
+             
+            </div>
+            <div style="margin-left:1vh; width:4vh;" class="createMDTTab">
+                <p style="margin-bottom:10vh;">+</p> 
+             </div>
+        </div>
+        <div class="main-container">
+            <div class="nav-menu">
+                <div class="nav-item dashboard-nav-item" data-page=".dashboard-page-container">Dashboard</div>
+                <div class="nav-item profiles-nav-item" data-page=".profile-page-container">Profiles</div>
+                <div class="nav-item incidents-nav-item" data-page=".incidents-page-container">Incidents</div>
+                <div class="nav-item reports-nav-item" data-page=".reports-page-container">Reports</div>
+                <div class="nav-item bolo-nav-item active-nav" data-page=".bolos-page-container">BOLOs</div>
+                <div class="nav-item penalcode-nav-item" data-page=".penalcode-page-container">Roster</div>
+                <div class="nav-item dmv-nav-item" data-page=".dmv-page-container">DMV</div>
+                <div class="nav-item weaponreg-nav-item "data-page=".weaponreg-page-container">Weapon Database</div>
+                <div class="nav-item doj-nav-item "data-page=".doj-page-container">DOJ</div>
+                <div class="nav-item cams-nav-item" data-page=".cams-page-container">Cameras</div>
+            </div>
+            <div class="bolos-container">
+
+                <div style="display: flex;" class="bolos-search-title-holder">
+                    <div class="bolos-search-title"> <span class="fas fa-search"></span> Bolos</div>
+                    <div class="bolos-search-refresh">Refresh</div>
+                </div>
+                <div class="bolos-search-input"><input id="bolos-search-input" placeholder="Search Bolo..."> </div>
+                <div class="bolos-items">
+                </div>
+            </div>
+            <div class="manage-bolos-container">
+                <div style="display: flex;" class="manage-bolos-title-holder">
+                    <div class="manage-bolos-title">Manage Bolo</div>
+                    <div class="manage-bolos-new">New</div>
+                    <div class="manage-bolos-save">Save</div>
+                </div>
+                <div class="manage-bolos-editing-title" data-id=0>You are currently creating a new BOLO</div>
+                <div class="manage-bolos-input-tag bolotitle-title">Title</div>
+                <div class="manage-bolos-input-title">
+                    <span class="fas fa-tags"></span>
+                    <input placeholder="Place title here..." id="bolotitle" class="manage-bolos-input-title">
+                </div>
+
+                <div class="manage-bolos-input-tag boloplate-title">Plate</div>
+                <div class="manage-bolos-input-plate"><span class="fas fa-address-card"></span> <input placeholder="Place plate here..." id="boloplate" class="manage-bolos-input-plate"></div>
+
+                <div class="manage-bolos-input-tag boloowner-title">Owner</div>
+                <div class="manage-bolos-input-owner"><span class="fas fa-bookmark"></span> <input placeholder="Place vehicle owner here..." id="boloowner" class="manage-bolos-input-owner"></div>
+
+                <div class="manage-bolos-input-tag boloindividual-title">Individual</div>
+                <div class="manage-bolos-input-individual"><span class="fas fa-user"></span> <input placeholder="Place invidivual here..." id="boloindividual" class="manage-bolos-input-individual"></div>
+
+                <textarea class="manage-bolos-reports-content" id="bolodetail" placeholder="Bolo detail goes here..."></textarea>
+            </div>
+
+            <div class="manage-bolos-right-container">
+                <div class="manage-bolos-tags-container">
+                    <div style="display: flex; align-items: center;">
+                        <div class="manage-bolos-title-tag">Tags</div>
+                        <div class="manage-bolos-tags-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="manage-bolos-tags-holder"></div>
+                </div>
+                <div class="manage-bolos-gallery-container">
+                    <div style="display: flex; align-items: center;">
+                        <div class="gallery-title">Gallery</div>
+                        <div class="bolo-gallery-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="bolo-gallery-upload-input"><input id="bolo-gallery-upload-input" placeholder="Upload URL...">
+                    </div>
+                    <div class="bolo-gallery-inner-container"></div>
+                </div>
+                <div class="manage-officers-tags-container">
+                    <div style="display: flex; align-items: center;">
+                        <div class="tags-title">Officers Involved</div>
+                        <div class="officers-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="manage-officers-tags-holder"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="penalcode-page-container close-all">
+        <div class="header">
+            <img src="img/sasp_badge.png" class="badge-logo">
+            <div class="header-left">
+                <div class="header-title" style="color: #caa95d; font-weight: bold; font-size: 20px;">SAN ANDREAS STATE POLICE</div>
+                <div style="color: white; font-weight: lighter; font-size: 18px;">Mobile Database Terminal</div>
+            </div>
+            <div class="header-right">
+                <div style="color: white; font-weight: lighter; font-size: 16px; position: absolute; right:0; bottom:-6vh;" class="name-shit">Welcome, Loading...
+                </div>
+            </div>
+        </div>
+        <div class="header-tabs">
+            <div class="tab-instances">
+             
+            </div>
+            <div style="margin-left:1vh; width:4vh;" class="createMDTTab">
+                <p style="margin-bottom:10vh;">+</p> 
+             </div>
+        </div>
+        <div class="main-container">
+            <div class="nav-menu">
+                <div class="nav-item" data-page=".dashboard-page-container">Dashboard</div>
+                <div class="nav-item" data-page=".profile-page-container">Profiles</div>
+                <div class="nav-item incidents-nav-item" data-page=".incidents-page-container">Incidents</div>
+                <div class="nav-item" data-page=".reports-page-container">Reports</div>
+                <div class="nav-item bolo-nav-item" data-page=".bolos-page-container">BOLOs</div>
+                <div class="nav-item penalcode-nav-item active-nav" data-page=".penalcode-page-container">Roster</div>
+                <div class="nav-item dmv-nav-item" data-page=".dmv-page-container">DMV</div>
+                <div class="nav-item weaponreg-nav-item "data-page=".weaponreg-page-container">Weapon Database</div>
+                <div class="nav-item doj-nav-item "data-page=".doj-page-container">DOJ</div>
+                <div class="nav-item cams-nav-item" data-page=".cams-page-container">Cameras</div>
+            </div>
+            <div class="penalcode-embed" style="border:none;">
+                <iframe class="roster-iframe" src="" target="_blank"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="dmv-page-container close-all">
+        <div class="header">
+            <img src="img/sasp_badge.png" class="badge-logo">
+            <div class="header-left">
+                <div class="header-title" style="color: #caa95d; font-weight: bold; font-size: 20px;">SAN ANDREAS STATE POLICE</div>
+                <div style="color: white; font-weight: lighter; font-size: 18px;">Mobile Database Terminal</div>
+            </div>
+            <div class="header-right">
+                <div style="color: white; font-weight: lighter; font-size: 16px; position: absolute; right:0; bottom:-6vh;" class="name-shit">Welcome, Loading...
+                </div>
+            </div>
+        </div>
+        <div class="header-tabs">
+            <div class="tab-instances">
+             
+            </div>
+            <div style="margin-left:1vh; width:4vh;" class="createMDTTab">
+                <p style="margin-bottom:10vh;">+</p> 
+             </div>
+        </div>
+        <div class="main-container">
+            <div class="nav-menu">
+                <div class="nav-item" data-page=".dashboard-page-container">Dashboard</div>
+                <div class="nav-item" data-page=".profile-page-container">Profiles</div>
+                <div class="nav-item incidents-nav-item" data-page=".incidents-page-container">Incidents</div>
+                <div class="nav-item" data-page=".reports-page-container">Reports</div>
+                <div class="nav-item bolo-nav-item" data-page=".bolos-page-container">BOLOs</div>
+                <div class="nav-item penalcode-nav-item" data-page=".penalcode-page-container">Roster</div>
+                <div class="nav-item dmv-nav-item active-nav" data-page=".dmv-page-container">DMV</div>
+                <div class="nav-item weaponreg-nav-item "data-page=".weaponreg-page-container">Weapon Database</div>
+                <div class="nav-item doj-nav-item "data-page=".doj-page-container">DOJ</div>
+                <div class="nav-item cams-nav-item" data-page=".cams-page-container">Cameras</div>
+            </div>
+            <div class="dmv-container">
+                <div class="dmv-search-title"> <span class="fas fa-search"></span> Vehicles</div>
+                <div class="dmv-search-input"><input id="dmv-search-input" placeholder="Search Vehicles..."> </div>
+                <div class="dmv-items">
+
+                </div>
+            </div>
+            <div class="vehicle-information-container">
+                <div style="display: flex;" class="vehicle-information-title-holder" data-dbid=0>
+                    <div class="vehicle-information-title">Vehicle Information</div>
+                    <div class="vehicle-information-save">Save</div>
+                </div>
+                <div class="vehicle-info-stuff">
+                    <img src="https://pbs.twimg.com/media/EYF7l2GXYAAuDZI?format=jpg&name=large" class="vehicle-info-image" onerror="this.src='img/not-found.jpg'">
+                    <div class="vehicle-info-inner-container">
+                        <div class="vehicle-info-plate">Registration Plate</div>
+                        <div><span class="fas fa-address-card vehicle-info-icon"></span><input type="text" readonly class="vehicle-info-plate-input"></div>
+                        <div class="vehicle-info-line"></div>
+                        <div class="vehicle-info-owner">Owner</div>
+                        <div><span class="fas fa-bookmark vehicle-info-icon"></span><input type="text" readonly class="vehicle-info-owner-input"></div>
+                        <div class="vehicle-info-line"></div>
+                        <div class="vehicle-info-class">Class</div>
+                        <div><span class="fas fa-folder vehicle-info-icon"></span><input type="text" readonly class="vehicle-info-class-input"></div>
+                        <div class="vehicle-info-line"></div>
+                        <div class="vehicle-info-model">Make/Model</div>
+                        <div><span class="fas fa-car vehicle-info-icon"></span><input type="text" readonly class="vehicle-info-model-input" data-modelName=""></div>
+                        <div class="vehicle-info-line"></div>
+                        <div class="vehicle-info-imageurl">Image URL</div>
+                        <div><span class="fas fa-images vehicle-info-icon"></span><input type="text" class="vehicle-info-imageurl-input"></div>
+                        <div class="vehicle-info-line" style="margin-bottom: 0px;"></div>
+                    </div>
+                </div>
+                <div class="vehicle-info-tags-container">
+                    <div class="vehicle-info-tags-title">Known Information</div>
+                    <div class="vehicle-info-tags-holder">
+                        <div class="vehicle-tags">
+                            <div class="vehicle-tag red-tag">Paint</div>
+                            <div class="vehicle-tag red-tag">Impound</div>
+                            <div class="vehicle-tag red-tag">BOLO</div>
+                            <div class="vehicle-tag red-tag">Code 5</div>
+                            <div class="vehicle-tag red-tag">Stolen</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:inline-block;">
+                    <textarea class="vehicle-info-content" placeholder="Place vehicle notes here..."></textarea>
+                    <span class="vehiclestrike-points-container">
+                        <div> <b>Strike 1</b>
+                            <br>
+                            <input type="checkbox" name="strikecheck">
+                            <input style="margin-left:50px;" type="checkbox" name="strikecheck">
+                            <input style="margin-left:50px;" type="checkbox" name="strikecheck">
+                            <b style="margin-left:25px; margin-top:10px;">10%</b>
+                        </div>
+
+                        <br>
+                        <div> <b>Strike 2</b>
+                            <br>
+                            <input type="checkbox" name="strikecheck">
+                            <input style="margin-left:50px;" type="checkbox" name="strikecheck">
+                            <input style="margin-left:50px;" type="checkbox" name="strikecheck">
+                            <b style="margin-left:25px; margin-top:10px;">15%</b>
+                        </div>
+
+                        <br>
+                        <div> <b>Strike 3</b>
+                            <br>
+                            <input type="checkbox" name="strikecheck">
+                            <input style="margin-left:50px;" type="checkbox" name="strikecheck">
+                            <input style="margin-left:50px;" type="checkbox" name="strikecheck">
+                            <b style="margin-left:25px; margin-top:10px;">20%</b>
+                        </div>
+
+                        <br>
+                        <div> <b>Strike 4</b>
+                            <br>
+                            <input type="checkbox" name="strikecheck">
+                            <input style="margin-left:50px;" type="checkbox" name="strikecheck">
+                            <input style="margin-left:50px;" type="checkbox" name="strikecheck">
+                            <b style="margin-left:25px; margin-top:10px;">25%</b>
+                        </div>
+
+                        <br>
+                        <div> <b>Strike 5</b>
+                            <br>
+                            <input type="checkbox" name="strikecheck">
+                            <input style="margin-left:50px;" type="checkbox" name="strikecheck">
+                            <input style="margin-left:50px;" type="checkbox" name="strikecheck">
+                            <b style="margin-left:16px; margin-top:10px; overflow:visible;">Perm. Impound</b>
+                        </div>
+
+
+
+                    </span>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <div class="weaponreg-page-container close-all">
+        <div class="header">
+            <img src="img/sasp_badge.png" class="badge-logo">
+            <div class="header-left">
+                <div class="header-title" style="color: #caa95d; font-weight: bold; font-size: 20px;">SAN ANDREAS STATE POLICE</div>
+                <div style="color: white; font-weight: lighter; font-size: 18px;">Mobile Database Terminal</div>
+            </div>
+            <div class="header-right">
+                <div style="color: white; font-weight: lighter; font-size: 16px; position: absolute; right:0; bottom:-6vh;" class="name-shit">Welcome, Loading...
+                </div>
+            </div>
+        </div>
+        <div class="header-tabs">
+            <div class="tab-instances">
+             
+            </div>
+            <div style="margin-left:1vh; width:4vh;" class="createMDTTab">
+                <p style="margin-bottom:10vh;">+</p> 
+             </div>
+        </div>
+        <div class="main-container">
+            <div class="nav-menu">
+                <div class="nav-item dashboard-nav-item" data-page=".dashboard-page-container">Dashboard</div>
+                <div class="nav-item profiles-nav-item" data-page=".profile-page-container">Profiles</div>
+                <div class="nav-item incidents-nav-item" data-page=".incidents-page-container">Incidents</div>
+                <div class="nav-item reports-nav-item" data-page=".reports-page-container">Reports</div>
+                <div class="nav-item bolo-nav-item" data-page=".bolos-page-container">BOLOs</div>
+                <div class="nav-item penalcode-nav-item" data-page=".penalcode-page-container">Roster</div>
+                <div class="nav-item dmv-nav-item" data-page=".dmv-page-container">DMV</div>
+                <div class="nav-item weaponreg-nav-item active-nav"data-page=".weaponreg-page-container">Weapon Database</div>
+                <div class="nav-item doj-nav-item "data-page=".doj-page-container">DOJ</div>
+                <div class="nav-item cams-nav-item" data-page=".cams-page-container">Cameras</div>
+
+            </div>
+
+            <div class="weaponreg-container">
+
+                <div style="display: flex;" class="weaponreg-search-title-holder">
+                    <div class="weaponreg-search-title"> <span class="fas fa-search"></span> Weapon Database</div>
+                    <div class="weaponreg-search-refresh">Refresh</div>
+                </div>
+                <div class="weaponreg-search-input"><input id="weaponreg-search-input" placeholder="Search Serial Number..."> </div>
+                <div class="weaponreg-items">
+                </div>
+            </div>
+            <div class="weaponreg-timeline-container">
+                <div style="display: flex;" class="weaponreg-timeline-title-holder">
+                    <div class="weaponreg-timeline-title">Edit Timeline</div>
+                    <div class="weaponreg-timeline-save">Save</div>
+                </div>
+                <div class="weaponreg-timeline-editing-title" data-id="0">You are currently modifying a timeline</div>
+                <div class="weaponreg-timeline-serialNumberHeader">Weapon Serial Number</div>
+                <div class="weaponreg-timeline-serialNumber">
+                    <span class="fas fa-tags"></span>
+                    <div id="weaponreg-serialNumber">818HHJ1an1</div>
+                </div>
+
+                <div class="weaponreg-timeline-weaponNameHeader">Weapon Name</div>
+                <div class="weaponreg-timeline-weaponName">
+                    <span class="fas fa-tags"></span>
+                    <div id="weaponreg-weaponName">AK47</div>
+                    
+                </div>
+                
+                <div class="weaponreg-timeline-content">
+                    <div class="weaponreg-timeline-event"><div class="weaponreg-timeline-event-type">Crafted</div><div class="weaponreg-timeline-event-time">2022/08/13</div></div>
+                </div> <!--This gets filled with timeline events-->
+                <div id="weaponreg-timeline-event-addbtn">Add New Event</div>
+            </div>
+            
+            <div class="weaponreg-timeline-right-container">
+                <textarea class="weaponreg-timeline-event-title" id="weaponreg-timeline-right-event-title">Crafted</textarea>
+                <textarea class="weaponreg-timeline-event-details" id="weaponreg-timeline-right-event-details">Theodore Cook crafted this minigun at Ammunation Store 1 on August 13th 2022</textarea>
+
+                <div class="weaponreg-timeline-persons-tags-container">
+                    <div style="display: flex; align-items: center;">
+                        <div class="tags-title">Persons Involved</div>
+                        <div class="weaponreg-timeline-persons-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="weaponreg-timeline-persons-tags-holder"></div>
+                </div>
+
+                <div class="weaponreg-timeline-tags-container">
+                    <div style="display: flex; align-items: center;">
+                        <div class="tags-title">Tags</div>
+                        <div class="weaponreg-timeline-tags-add-btn fas fa-plus"></div>
+                    </div>
+                    <div class="weaponreg-timeline-tags-holder"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="doj-page-container close-all">
+        <div class="header">
+            <img src="img/sasp_badge.png" class="badge-logo">
+            <div class="header-left">
+                <div class="header-title" style="color: #caa95d; font-weight: bold; font-size: 20px;">Unified Police Department</div>
+                <div style="color: white; font-weight: lighter; font-size: 18px;">Mobile Database Terminal</div>
+            </div>
+            
+            <div class="header-right">
+                <div style="color: white; font-weight: lighter; font-size: 16px; position: absolute; right:0; bottom:-6vh;" class="name-shit">Welcome, Loading...
+                </div>
+            </div>
+        </div>
+        <div class="header-tabs">
+            <div class="tab-instances">
+             
+            </div>
+            <div style="margin-left:1vh; width:4vh;" class="createMDTTab">
+                <p style="margin-bottom:10vh;">+</p> 
+             </div>
+        </div>
+        <div class="main-container">
+            <div class="nav-menu">
+                <div class="nav-item dashboard-nav-item" data-page=".dashboard-page-container">Dashboard</div>
+                <div class="nav-item profiles-nav-item" data-page=".profile-page-container">Profiles</div>
+                <div class="nav-item incidents-nav-item" data-page=".incidents-page-container">Incidents</div>
+                <div class="nav-item reports-nav-item" data-page=".reports-page-container">Reports</div>
+                <div class="nav-item bolo-nav-item" data-page=".bolos-page-container">BOLOs</div>
+                <div class="nav-item penalcode-nav-item" data-page=".penalcode-page-container">Roster</div>
+                <div class="nav-item dmv-nav-item" data-page=".dmv-page-container">DMV</div>
+                <div class="nav-item weaponreg-nav-item "data-page=".weaponreg-page-container">Weapon Database</div>
+                <div class="nav-item doj-nav-item active-nav"data-page=".doj-page-container">DOJ</div>
+                <div class="nav-item cams-nav-item" data-page=".cams-page-container">Cameras</div>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+        
+            </div>
+
+            <div style="display: flex; flex-direction: column;">
+                <div class="doj-warrants-container">
+
+                    <div style="display: flex;" class="warrants-search-title-holder">
+                        <div class="doj-warrants-title"> <span class="fas fa-search"></span> Warrants</div>
+                        <div class="doj-warrants-search-refresh">Refresh</div>
+                    </div>
+                    <div class="warrants-search-input"><input id="warrants-search-input" placeholder="Search Warrants...">
+                    </div>
+
+                    <div class="doj-warrants-list">
+                        
+                    </div>
+                    <div id="doj-warrants-createnew">Create Warrant</div>
+
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <div style="display:none" class="doj-warrants-info-container">
+                    <div class="doj-warrants-title" data-warrantid="" >New Warrant</div>
+
+                    <div class="newwarrants-person-header">Warrant For:
+                        <div class="newwarrants-searchperson-tags-add-btn fas fa-plus"></div>   
+                        <div class="newwarrants-personname-container">
+                            <span class="fas fa-tags"></span>
+                            <div id="newwarrants-personname"></div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="newwarrants-relation-header">In relation to:
+                        <div class="newwarrants-relation-container">
+                            <div class="newwarrants-relation-incident-tag">Incident</div>
+                            <div class="newwarrants-incident-input-title"><span class="fas fa-sticky-note"></span> <input placeholder="Incident Number" class="newwarrants-incident-input-title" id="newwarrant-incident-input"></div>
+                            <div class="newwarrants-relation-report-tag">Report</div>
+                            <div class="newwarrants-report-input-title"><span class="fas fa-file"></span> <input placeholder="Report Number" class="newwarrants-report-input-title" id="newwarrant-report-input"></div>
+                        </div>
+                    </div>
+                    <div class="newwarrants-person-header">Warrant Details</div>
+                    <textarea class="newwarrant-content"
+                    placeholder="Warrant report content goes here..."></textarea>
+               
+                   
+                    <div class="newwarrants-duration-container">
+                        <div class="newwarrants-duration-tag">Duration</div>
+                        <div class="newwarrants-duration-input-title"><span class="fas fa-calendar"></span> <input type="text" required pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{2}" value="00:24:00:00" class="newwarrants-duration-input-title" id="newwarrant-duration-input"></div>
+                        
+                        <div class="newwarrants-writtenon-header">Written On: <span class="doj-newwarrant-date"></span></div>
+                    </div>
+                    
+                    <div id="doj-warrants-publishwarrant">Publish Warrant</div>
+                    
+                 </div>
+            </div>
+          
+
+
+            <div class="doj-lawyers-container">
+                <div style="height:2vh; margin-left:auto; margin-right:auto;" class="viewPenalCode-btn">View Penal Codes</div>
+
+                <div class="doj-lawyers-title"> Lawyers</div>
+                <div style="display: flex; align-items: center; margin-left:15px;">
+                   
+                    <div class="active-unit-count" id="lawyer-count">0</div> 
+                    <div class="active-unit-count" id="judge-count">0</div>
+
+                </div>
+                <div class="doj-lawyers-unit-list">
+                </div>
+
+                <div class="doj-lawyers-title"> Prisoners</div>
+                <div style="display: flex; align-items: center; margin-left:15px;">
+                   
+                    <div class="active-unit-count" id="prisoner-count">0</div> 
+                  
+
+                </div>
+                <div class="doj-prisoners-list">
+                </div>
+
+                <div class="doj-lawyers-title">Probation</div>
+                <div style="display: flex; align-items: center; margin-left:15px;">
+                   
+                    <div class="active-unit-count" id="probation-count">0</div> 
+                  
+
+                </div>
+                <div class="doj-probation-list">
+                </div>
+
+              
+                
+                
+            </div>
+        </div>
+    </div>
+    <div class="cams-page-container close-all">
+        <div class="header">
+            <img src="img/sasp_badge.png" class="badge-logo">
+            <div class="header-left">
+                <div class="header-title" style="color: #caa95d; font-weight: bold; font-size: 20px;">SAN ANDREAS STATE POLICE</div>
+                <div style="color: white; font-weight: lighter; font-size: 18px;">Mobile Database Terminal</div>
+            </div>
+            <div class="header-right">
+                <div style="color: white; font-weight: lighter; font-size: 16px; position: absolute; right:0; bottom:-6vh;" class="name-shit">Welcome, Loading...
+                </div>
+            </div>
+        </div>
+        <div class="header-tabs">
+            <div class="tab-instances">
+             
+            </div>
+            <div style="margin-left:1vh; width:4vh;" class="createMDTTab">
+                <p style="margin-bottom:10vh;">+</p> 
+             </div>
+        </div>
+        <div class="main-container">
+            <div class="nav-menu">
+                <div class="nav-item dashboard-nav-item" data-page=".dashboard-page-container">Dashboard</div>
+                <div class="nav-item profiles-nav-item" data-page=".profile-page-container">Profiles</div>
+                <div class="nav-item incidents-nav-item" data-page=".incidents-page-container">Incidents</div>
+                <div class="nav-item reports-nav-item" data-page=".reports-page-container">Reports</div>
+                <div class="nav-item bolo-nav-item" data-page=".bolos-page-container">BOLOs</div>
+                <div class="nav-item penalcode-nav-item" data-page=".penalcode-page-container">Roster</div>
+                <div class="nav-item dmv-nav-item" data-page=".dmv-page-container">DMV</div>
+                <div class="nav-item weaponreg-nav-item "data-page=".weaponreg-page-container">Weapon Database</div>
+                <div class="nav-item doj-nav-item "data-page=".doj-page-container">DOJ</div>
+                <div class="nav-item cams-nav-item active-nav" data-page=".cams-page-container">Cameras</div>
+            </div>
+            <div class="cams-container">
+                <div class="cams-item">
+                                
+                    <div class="cams-items" id="1"><img class="cams-image" src="img/cam1.png">MRPD CAM #1</div>
+                    <div class="cams-items" id="2"><img class="cams-image" src="img/cam2.png">MRPD CAM #2</div>
+                    <div class="cams-items" id="3"><img class="cams-image" src="img/cam3.png">MRPD CAM #3</div>
+
+                    <div class="cams-items" id="4"><img class="cams-image" src="img/sandy.png">SANDY PD</div>
+
+                    <div class="cams-items" id="5"><img class="cams-image" src="img/cam5.png">PALETO PD</div>
+
+                    <div class="cams-items" id="6"><img class="cams-image" src="img/pacific.png">PACIFIC BANK CAM #1</div>
+                    <div class="cams-items" id="7"><img class="cams-image" src="img/pacific3.png">PACIFIC BANK CAM #2</div>
+                    <div class="cams-items" id="8"><img class="cams-image" src="img/pacific2.png">PACIFIC BANK CAM #3</div>
+                    <div class="cams-items" id="9"><img class="cams-image" src="img/pacific4.png">PACIFIC BANK CAM #4</div>
+                    <div class="cams-items" id="10"><img class="cams-image" src="img/pacific5.png">PACIFIC BANK CAM #5</div>
+                    <div class="cams-items" id="11"><img class="cams-image" src="img/pacific1.png">PACIFIC BANK CAM #6</div>
+
+                    <div class="cams-items" id="12"><img class="cams-image" src="img/ltd.png">Limited Ltd Grove St. Cam #1</div>
+
+                    <div class="cams-items" id="13"><img class="cams-image" src="img/rob.png">Rob's Liquor Prosperity St. Cam #1</div>
+
+                    <div class="cams-items" id="14"><img class="cams-image" src="img/rob.png">Rob's Liquor San Andreas Ave. Cam #1</div>
+
+                    <div class="cams-items" id="15"><img class="cams-image" src="img/ltd.png">Limited Ltd Ginger St. Cam #1</div>
+
+
+                    <div class="cams-items" id="16"><img class="cams-image" src="img/gas3.png">24/7 Supermarkt Innocence Blvd. Cam #1</div>
+
+                    
+                    <div class="cams-items" id="17"><img class="cams-image" src="img/rob.png">Rob's Liqour El Rancho Blvd. Cam #1</div>
+
+                    <div class="cams-items" id="18"><img class="cams-image" src="img/gas3.png">Limited Ltd West Mirror Dr Cam #1</div>
+
+
+                    <div class="cams-items" id="19"><img class="cams-image" src="img/gas13.png">24/7 Supermarkt Clinton Ave Cam #1</div>
+
+
+                    <div class="cams-items" id="20"><img class="cams-image" src="img/banham.png">24/7 Supermarkt Banham Canyon Dr Cam #1</div>
+
+
+                    <div class="cams-items" id="21"><img class="cams-image" src="img/rob.png">Rob's Liqour Great Ocean Hwy Cam #1</div>
+
+
+                    <div class="cams-items" id="22"><img class="cams-image" src="img/gas13.png">24/7 Supermarket Inseno Road Cam #1</div>
+
+
+                    <div class="cams-items" id="23"><img class="cams-image" src="img/gas13.png">24/7 Supermarket Barbareno Rd. Cam #1</div>
+
+
+                    <div class="cams-items" id="24"><img class="cams-image" src="img/gas13.png">24/7 Supermarket Route 68 Cam #1</div>
+
+
+                    <div class="cams-items" id="25"><img class="cams-image" src="img/rob.png">Rob's Liqour Route 68 Cam #1</div>
+
+
+                    <div class="cams-items" id="26"><img class="cams-image" src="img/senora.png">24/7 Supermarket Senora Fwy Cam #1</div>
+
+                    <div class="cams-items" id="27"><img class="cams-image" src="img/gas13.png">24/7 Supermarket Alhambra Dr. Cam #1</div>
+
+
+                    <div class="cams-items" id="28"><img class="cams-image" src="img/gas3.png">24/7 Supermarket Senora Fwy Cam #2</div>
+
+
+                    <div class="cams-items" id="29"><img class="cams-image" src="img/fleeca.png">Fleeca Hawick Ave Cam #1</div>
+
+
+                    <div class="cams-items" id="30"><img class="cams-image" src="img/fleeca.png">Fleeca Legion Square Cam #1</div>
+                    <div class="cams-items" id="31"><img class="cams-image" src="img/fleeca.png">Fleeca Hawick Ave Cam #2</div>
+
+                    <div class="cams-items" id="32"><img class="cams-image" src="img/fleeca.png">Fleeca Del Perro Blvd Cam #1</div>
+                    <div class="cams-items" id="33"><img class="cams-image" src="img/fleeca.png">Fleeca Great Ocean Hwy Cam #1</div>
+
+                    <div class="cams-items" id="34"><img class="cams-image" src="img/palete1.png">Paleto Bank Cam #1</div>
+
+                    <div class="cams-items" id="35"><img class="cams-image" src="img/palete1.png">Paleto Bank Cam #2</div>
+                    <div class="cams-items" id="36"><img class="cams-image" src="img/hallway.png">Paleto Bank Cam #3</div>
+                    <div class="cams-items" id="37"><img class="cams-image" src="img/bank.png">Paleto Bank Cam #4</div>
+
+                    <div class="cams-items" id="38"><img class="cams-image" src="img/don.png">Don's Country Store Paleto Bay Cam #1</div>
+
+                    <div class="cams-items" id="39"><img class="cams-image" src="img/jewl1.png">Vangelico Jewlery Cam #1</div>
+                    <div class="cams-items" id="40"><img class="cams-image" src="img/jewl2.png">Vangelico Jewlery Cam #2</div>
+                    <div class="cams-items" id="41"><img class="cams-image" src="img/jewl3.png">Vangelico Jewlery Cam #3</div>
+                    <div class="cams-items" id="42"><img class="cams-image" src="img/jewl4.png">Vangelico Jewlery Cam #4</div>
+
+                    <div class="cams-items" id="43"><img class="cams-image" src="img/prison1.png">Prison Cam #1</div>
+                    <div class="cams-items" id="44"><img class="cams-image" src="img/prison2.png">Prison Cam #2</div>
+                    <div class="cams-items" id="45"><img class="cams-image" src="img/prison3.png">Prison Cam #3</div>
+                    <div class="cams-items" id="46"><img class="cams-image" src="img/prison4.png">Prison Cam #4</div>
+
+                    <div class="cams-items" id="47"><img class="cams-image" src="img/s1.png">Traffic Cam #1</div>
+                    <div class="cams-items" id="48"><img class="cams-image" src="img/s2.png">Traffic Cam #2</div>
+                    <div class="cams-items" id="49"><img class="cams-image" src="img/s3.png">Traffic Cam #3</div>
+                    <div class="cams-items" id="50"><img class="cams-image" src="img/s4.png">Traffic Cam #4</div>
+                    <div class="cams-items" id="51"><img class="cams-image" src="img/speed5.png">Traffic Cam #5</div>
+                    <div class="cams-items" id="52"><img class="cams-image" src="img/speed6.png">Traffic Cam #6</div>
+                    <div class="cams-items" id="53"><img class="cams-image" src="img/speed7.png">Traffic Cam #7</div>
+                    <div class="cams-items" id="54"><img class="cams-image" src="img/speed8.png">Traffic Cam #8</div>
+                    <div class="cams-items" id="55"><img class="cams-image" src="img/speed9.png">Traffic Cam #9</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="impound-form" style="display: none;">
+        <form>
+            <i class="far fa-id-card fa-lg"></i><input type="text" class="impound-plate" id="plate" name="plate" placeholder="Plate" disabled><br>
+            <i class="far fa-sticky-note fa-lg"></i><input type="text" class="impound-linkedreport" id="linkedreport" name="linkedreport" placeholder="Linked Report" required><br>
+            <i class="far fa-money-bill-alt fa-lg"></i><input type="text" class="impound-fee" id="fee" name="fee" placeholder="Fee" required><br>
+            <i class="far fa-clock fa-lg"></i><input type="text" id="time" class="impound-time" name="time" placeholder="Time (in mins)" required><br>
+        </form>
+        <div class="impound-buttons">
+            <div class="impound-cancel">Cancel</div>
+            <div class="impound-submit">Submit</div>
+        </div>
+    </div>
+</body>
+
+</html>
